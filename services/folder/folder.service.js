@@ -33,6 +33,18 @@ module.exports = {
                 async handler(ctx) {
                     return await folderModel.findOneAndDelete({ "folderName": ctx.params.folderName })
                 }
+            },
+            findafolderofuser: {
+                async handler(ctx) {
+                   let user = await ctx.broker.call("userservice.read",{userName : ctx.params.name})
+                    return folderModel.aggregate([
+                        {
+                            $match : {
+                                folderOwner : user.userName
+                            }
+                        }
+                    ])
+                }
             }
         },
     }

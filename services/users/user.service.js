@@ -33,13 +33,6 @@ module.exports = {
                     return await userModel.findOneAndDelete({ "userName": ctx.params.userName })
                 }
             },
-
-            findafolderofuser: {
-                async handler(ctx) {
-                    user = await userModel.findOne({ "userName": ctx.params.userName })
-
-                }
-            }
         },
     }
 
